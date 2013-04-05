@@ -284,6 +284,8 @@ void CUtil::CleanString(const std::string& strFileName,
     int j=0;
     if ((j=reTags.RegFind(strTitleAndYear.c_str())) > 0)
       strTitleAndYear = strTitleAndYear.substr(0, j);
+    else if (j==0)
+      strTitleAndYear = strTitleAndYear.substr(reTags.GetFindLen());
   }
 
   // final cleanup - special characters used instead of spaces:
