@@ -281,7 +281,7 @@ bool CPeripheralCecAdapter::InitialiseFeature(const PeripheralFeature feature)
     }
     else
     {
-      CLog::Log(LOGDEBUG, "%s - using libCEC v%s", __FUNCTION__, m_cecAdapter->ToString((cec_server_version)m_configuration.serverVersion));
+      CLog::Log(LOGDEBUG, "%s - using libCEC v%s", __FUNCTION__, m_cecAdapter->ToString((cec_version)m_configuration.serverVersion));
       SetVersionInfo(m_configuration);
     }
 
@@ -294,7 +294,7 @@ bool CPeripheralCecAdapter::InitialiseFeature(const PeripheralFeature feature)
 
 void CPeripheralCecAdapter::SetVersionInfo(const libcec_configuration &configuration)
 {
-  m_strVersionInfo = StringUtils::Format("libCEC %s - firmware v%d", m_cecAdapter->ToString((cec_server_version)configuration.serverVersion), configuration.iFirmwareVersion);
+  m_strVersionInfo = StringUtils::Format("libCEC %s - firmware v%d", m_cecAdapter->ToString((cec_version)configuration.serverVersion), configuration.iFirmwareVersion);
 
   // append firmware build date
   if (configuration.iFirmwareBuildDate != CEC_FW_BUILD_UNKNOWN)
@@ -1288,7 +1288,7 @@ void CPeripheralCecAdapter::SetConfigurationFromLibCEC(const CEC::libcec_configu
 void CPeripheralCecAdapter::SetConfigurationFromSettings(void)
 {
   // client version matches the version of libCEC that we originally used the API from
-  m_configuration.clientVersion = CEC_CLIENT_VERSION_2_2_0;
+  m_configuration.clientVersion = LIBCEC_VERSION_CURRENT;
 
   // device name 'XBMC'
   snprintf(m_configuration.strDeviceName, 13, "%s", GetSettingString("device_name").c_str());
